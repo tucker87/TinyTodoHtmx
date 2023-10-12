@@ -1,0 +1,29 @@
+@inherits RazorSliceHttpResult
+@inject Database db;
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <h1>Todos</h1>
+        <ul id="todos">
+        @await RenderPartialAsync("/Slices/_Todos.cshtml", db.Todos)
+        <partial name="_Todos.cshtml" for="Todos"></partial>
+        </ul>
+
+        <h2>Append</h2>
+        <form hx-post="/add" hx-target="#todos">
+        <input type="text" name="title" value="aaa"></input>
+        <button type="submit">+</button>
+        </form>
+
+        <h2>Prepend</h2>
+        <form hx-post="/addStart" hx-target="#todos">
+        <input type="text" name="title" value="bbb"></input>
+        <button type="submit">+</button>
+        </form>
+
+        <h2>Chain (Will Submit after Prepend)</h2>
+        <form hx-post="/add" hx-target="#todos" hx-trigger="submit, cool from:body">
+        <input type="text" name="title" value="ccc"></input>
+        </form>
+    </main>
+</div>

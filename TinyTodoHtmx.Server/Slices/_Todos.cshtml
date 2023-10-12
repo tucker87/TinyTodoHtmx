@@ -1,0 +1,7 @@
+@inherits RazorSliceHttpResult<List<Todo>>
+
+@foreach(var xi in Model.Select((x, i) => (x, i)))
+{
+    var (item, index) = xi;
+    <li>@item.Title <button hx-delete="/delete" hx-route-index="@index" hx-target="#todos">X</button></li>
+}

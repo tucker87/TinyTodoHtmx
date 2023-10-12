@@ -1,0 +1,1 @@
+public record Todo(string Title = "", bool Complete = false);
